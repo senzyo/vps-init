@@ -1,0 +1,23 @@
+Include /etc/ssh/sshd_config.d/*.conf        # 包含指定的配置文件, 可指定多个
+Port 30022                                   # 指定 SSH 的端口号
+LoginGraceTime 3s                            # 服务器在用户未成功登录后的一段时间内断开连接
+PermitRootLogin prohibit-password            # 禁用 root 用户的密码和键盘交互式身份验证
+MaxAuthTries 4                               # 每个连接允许的最大认证尝试次数。一旦失败次数达到该值的一半, 将记录额外的失败次数
+MaxSessions 10                               # 指定每个网络连接允许的最大开放的 shell, login 或 subsystem 会话数
+PubkeyAuthentication yes                     # 启用公钥身份验证
+AuthenticationMethods publickey              # 指定必须成功通过公钥身份验证
+PasswordAuthentication no                    # 禁用密码身份验证
+PermitEmptyPasswords no                      # 禁用使用空密码字符串登录
+KbdInteractiveAuthentication no              # 禁用键盘交互式认证
+UsePAM no                                    # 禁用插入式验证模块, 比如双重认证
+X11Forwarding no                             # 禁用 X11 转发
+PrintMotd no                                 # 禁止打印登录后的提示信息
+PrintLastLog yes                             # 显示上次登录的信息
+TCPKeepAlive yes                             # 指定系统应向对方发送 TCP keepalive 消息, 避免会话无限期挂起
+Compression no                               # 不压缩服务器与客户端之间传输的数据
+ClientAliveInterval 60                       # 服务器发送消息来请求客户端的响应的超时时间间隔
+ClientAliveCountMax 3                        # 如果服务器发送客户端活动消息达到此阈值, 将断开与客户端的连接
+MaxStartups 5:20:10                          # 指定最大并发未经身份验证的连接数
+AcceptEnv LANG LC_*                          # 允许客户端传递区域设置环境变量
+Subsystem sftp /usr/lib/openssh/sftp-server  # 配置外部子系统 (例如文件传输守护程序)
+AllowUsers root                              # 允许登录的用户名
