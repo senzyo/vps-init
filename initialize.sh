@@ -38,19 +38,31 @@ if ! grep -q "以下是自定义内容" "$conf_file"; then
 fi
 ls -al /etc/bash.bashrc
 
-read -rn 1 -p "${CYAN}[Notice]${NC} 请选择编辑器: [1] Neovim [2] Vim " option </dev/tty
+read -rn 1 -p "${CYAN}[Notice]${NC} 请选择编辑器: [1] neovim [2] vim [3] helix " option </dev/tty
 echo
 case "$option" in
-[1] | "")
-	command -v nvim &>/dev/null || apt install -y neovim
-	mkdir /etc/xdg/nvim
-	cp sysinit.vim /etc/xdg/nvim/sysinit.vim
-	ls -al /etc/xdg/nvim/sysinit.vim
+[3])
+	if ! command -v hx &>/dev/null; then
+		URL=$(curl -s https://api.github.com/repos/helix-editor/helix/releases/latest | grep "amd64.deb" | grep "browser_download_url" | cut -d '"' -f 4)
+		curl -fsSL "$URL" -o /tmp/helix.deb
+		apt install /tmp/helix.deb
+		rm /tmp/helix.deb
+	fi
+	mkdir -p "$HOME/.config/helix"
+	cp helix.config.toml "$HOME/.config/helix/config.toml"
+	ls -al "$HOME/.config/helix/config.toml"
 	;;
-*)
+[2])
 	command -v vim &>/dev/null || apt install -y vim
+	mkdir -p /etc/vim
 	cp vimrc /etc/vim/vimrc
 	ls -al /etc/vim/vimrc
+	;;
+[1] | *)
+	command -v nvim &>/dev/null || apt install -y neovim
+	mkdir -p /etc/xdg/nvim
+	cp sysinit.vim /etc/xdg/nvim/sysinit.vim
+	ls -al /etc/xdg/nvim/sysinit.vim
 	;;
 esac
 
