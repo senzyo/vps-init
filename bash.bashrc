@@ -22,7 +22,7 @@ alias la="ls -aF --color=auto"
 alias ll="ls -alF --color=auto"
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
-alias tree="tree -pughDC"
+alias tree="tree -C"
 
 ch() {
 	: >"$HOME/.bash_history"
@@ -31,3 +31,4 @@ ch() {
 }
 
 export TIME_STYLE="+%Y-%m-%d %H:%M:%S"
+export COLORTERM="truecolor"

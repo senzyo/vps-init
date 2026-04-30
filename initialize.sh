@@ -38,10 +38,21 @@ if ! grep -q "以下是自定义内容" "$conf_file"; then
 fi
 ls -al /etc/bash.bashrc
 
-command -v vim &>/dev/null || apt install -y vim
-
-cp vimrc /etc/vim/vimrc
-ls -al /etc/vim/vimrc
+read -rn 1 -p "${CYAN}[Notice]${NC} 请选择编辑器: [1] Neovim [2] Vim " option </dev/tty
+echo
+case "$option" in
+[1] | "")
+	command -v nvim &>/dev/null || apt install -y neovim
+	mkdir /etc/xdg/nvim
+	cp sysinit.vim /etc/xdg/nvim/sysinit.vim
+	ls -al /etc/xdg/nvim/sysinit.vim
+	;;
+*)
+	command -v vim &>/dev/null || apt install -y vim
+	cp vimrc /etc/vim/vimrc
+	ls -al /etc/vim/vimrc
+	;;
+esac
 
 cp sshd_config /etc/ssh/sshd_config
 ls -al /etc/ssh/sshd_config
