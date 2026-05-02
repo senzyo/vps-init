@@ -17,11 +17,11 @@ PS1+='\$ '
 PS1+='\[\e[0m\]'
 export PS1
 
+alias diff="diff --color=auto"
+alias grep="grep --color=auto"
 alias ls="ls -F --color=auto"
 alias la="ls -aF --color=auto"
 alias ll="ls -alF --color=auto"
-alias grep="grep --color=auto"
-alias diff="diff --color=auto"
 alias tree="tree -C"
 
 ch() {
@@ -30,5 +30,8 @@ ch() {
 	clear
 }
 
-export TIME_STYLE="+%Y-%m-%d %H:%M:%S"
+# eval "$(fnm env --use-on-cd --shell bash)"
+
 export COLORTERM="truecolor"
+# export EDITOR="/usr/bin/hx"
+export TIME_STYLE="+%Y-%m-%d %H:%M:%S"
