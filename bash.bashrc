@@ -22,6 +22,7 @@ alias grep="grep --color=auto"
 alias ls="ls -F --color=auto"
 alias la="ls -aF --color=auto"
 alias ll="ls -alF --color=auto"
+alias sudo="sudo "
 alias tree="tree -C"
 
 ch() {
