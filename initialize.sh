@@ -134,7 +134,10 @@ apt install -y trzsz
 
 command -v column &>/dev/null || apt install -y bsdextrautils
 
-# 之后是 Swap 部分
+# 以下是 Swap 部分
+echo "${CYAN}[df -h]${NC}------------------------------------------------------------------------------------------"
+df -h
+
 SWAP_FILE="/swapfile"
 SWAPPINESS=10
 SYSCTL_CONF="/etc/sysctl.d/99-sysctl.conf"
@@ -195,7 +198,11 @@ if [[ $(cat /proc/swaps | wc -l) -gt 1 ]] ||
 fi
 create_swap
 
-echo '[free -h]----------------------------------------------------------------------------------------------------'
+echo "${CYAN}[free -h]${NC}----------------------------------------------------------------------------------------"
 free -h
-echo '[cat /proc/swaps]--------------------------------------------------------------------------------------------'
+echo "${CYAN}[cat /proc/swaps]${NC}--------------------------------------------------------------------------------"
 cat /proc/swaps
+# Swap 部分结束
+
+export COLORTERM="truecolor"
+bash 24-bit-color.sh
