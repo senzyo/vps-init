@@ -71,7 +71,13 @@ esac
 
 cp sshd_config /etc/ssh/sshd_config
 ls -al /etc/ssh/sshd_config
+: >/etc/motd
 
+command -v nft &>/dev/null || apt install -y nftables
+if ! nft -c -f nftables.conf; then
+	echo "${RED}[Error]${NC} nftables.conf 语法检查未通过, 已跳过覆盖 /etc/nftables.conf"
+	exit 1
+fi
 cp nftables.conf /etc/nftables.conf
 ls -al /etc/nftables.conf
 systemctl enable nftables.service
@@ -128,16 +134,6 @@ else
 		fi
 	done
 fi
-
-SYSCTL_CONF="/etc/sysctl.d/99-sysctl.conf"
-sysctl net.ipv4.icmp_echo_ignore_broadcasts=1 net.ipv4.icmp_ratelimit=1000 &>/dev/null
-sed -i -e '/net.ipv4.icmp_echo_ignore_broadcasts/d' -e '/net.ipv4.icmp_ratelimit/d' /etc/sysctl.conf &>/dev/null
-find /etc/sysctl.d/ -name "*.conf" -exec sed -i -e '/net.ipv4.icmp_echo_ignore_broadcasts/d' -e '/net.ipv4.icmp_ratelimit/d' {} + &>/dev/null
-[[ -f "$SYSCTL_CONF" ]] || touch $SYSCTL_CONF
-{
-	echo "net.ipv4.icmp_echo_ignore_broadcasts = 1"
-	echo "net.ipv4.icmp_ratelimit = 1000"
-} >>$SYSCTL_CONF
 
 command -v gpg &>/dev/null || apt install -y gpg
 curl -fsSL 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x7074ce75da7cc691c1ae1a7c7e51d1ad956055ca' | gpg --yes --dearmor -o /usr/share/keyrings/trzsz.gpg

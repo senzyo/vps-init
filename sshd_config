@@ -13,11 +13,11 @@ Port 40022
 # 2. 身份验证与访问控制
 # ==========================================
 
-# 仅允许通过指定的普通用户名进行 SSH 登录
-AllowUsers senzyo
+# 仅允许通过指定的用户名进行 SSH 登录
+AllowUsers root senzyo
 
-# 禁用 root 用户直接登录, 强制通过普通用户登录后再进行提权
-PermitRootLogin no
+# 启用 root 用户直接登录
+PermitRootLogin yes
 
 # 启用公钥身份验证机制
 PubkeyAuthentication yes
@@ -95,8 +95,8 @@ X11Forwarding no
 # 禁用 SSH 代理转发, 防止跳板机上的代理连接被其他特权用户滥用
 AllowAgentForwarding no
 
-# 禁用 TCP 端口转发, 防止用户利用该连接进行内网穿透或规避防火墙限制
-AllowTcpForwarding no
+# 启用 TCP 端口转发
+AllowTcpForwarding yes
 
 
 # ==========================================

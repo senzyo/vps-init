@@ -10,7 +10,7 @@ apt update
 apt install -y curl
 curl -fsSL https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh -o reinstall.sh
 # bash reinstall.sh 系统名称 --ssh-key "你的 SSH 公钥"
-bash reinstall.sh debian --ssh-key "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFnzo2Pgfh1Ko7Ssvk+XvDEUJ78d3cLiY9DQ3NG29cWk senzyosama@gmail.com"
+bash reinstall.sh debian --ssh-key "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFnzo2Pgfh1Ko7Ssvk+XvDEUJ78d3cLiY9DQ3NG29cWk senzyosama@gmail.com" --ssh-port 40022
 reboot
 ```
 
