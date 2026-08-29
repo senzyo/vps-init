@@ -50,3 +50,13 @@ hostnamectl set-hostname VPS
 ```
 
 重新登录即可看到主机名已更改。
+
+`sudo` 时可能会报错主机名错误, 对于 Debian, 调整 `/etc/hosts`, 增加一行 `127.0.1.1 VPS`:
+
+```
+127.0.0.1       localhost
+127.0.1.1       VPS
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+```

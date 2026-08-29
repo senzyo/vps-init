@@ -15,7 +15,6 @@ PS1+='\n'
 PS1+='\[\e[1;31m\]'
 PS1+='\$ '
 PS1+='\[\e[0m\]'
-export PS1
 
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
