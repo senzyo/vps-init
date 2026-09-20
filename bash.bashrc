@@ -15,7 +15,6 @@ PS1+='\n'
 PS1+='\[\e[1;31m\]'
 PS1+='\$ '
 PS1+='\[\e[0m\]'
-export PS1
 
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
@@ -31,8 +30,13 @@ ch() {
 	clear
 }
 
-# eval "$(fnm env --use-on-cd --shell bash)"
-
 export COLORTERM="truecolor"
 # export EDITOR="/usr/bin/hx"
 export TIME_STYLE="+%Y-%m-%d %H:%M:%S"
+
+# export PATH="$HOME/.local/share/fnm:$PATH"
+# eval "$(fnm env --shell bash)"
+
+# export PATH="$HOME/.local/bin:$PATH"
+# eval "$(uv generate-shell-completion bash)"
+# eval "$(uvx --generate-shell-completion bash)"
