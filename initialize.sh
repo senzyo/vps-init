@@ -143,6 +143,9 @@ apt install -y trzsz
 
 command -v column &>/dev/null || apt install -y bsdextrautils
 
+# 限制系统日志归档的体积
+journalctl --rotate --vacuum-size=100M
+
 # 以下是 Swap 部分
 echo "${CYAN}[df -h]${NC}------------------------------------------------------------------------------------------"
 df -h
